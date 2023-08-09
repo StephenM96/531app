@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+// import { BrowserRouter, Route, Routes } from 'react-router-dom';
+// import LandingPage from './LandingPage';
+// import LoginPage from './LoginPage';
+// import Dashboard from './Dashboard';
+//will set up routes soon
 import './app.css'
 
 const WorkoutPlan = () => {
