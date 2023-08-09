@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './app.css'
 
 const WorkoutPlan = () => {
   const [lifts, setLifts] = useState({
@@ -89,6 +90,19 @@ const WorkoutPlan = () => {
     );
   };
 
+  const renderWeekColumn = (week) => {
+    return (
+      <div key={week} className="week-container">
+        {Object.keys(lifts).map((lift) => (
+          <div key={lift} className="day-column">
+            {generateWorkout(lift, lifts[lift], week)}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+
   return (
     <div>
       <h2>Enter Weights and Reps Achieved</h2>
@@ -96,7 +110,7 @@ const WorkoutPlan = () => {
       <h2>3-Week Workout Plan</h2>
       {Array.from({ length: 3 }, (_, i) => i + 1).map((week) => (
         <div key={week}>
-          {Object.keys(lifts).map((lift) => generateWorkout(lift, lifts[lift], week))}
+          {renderWeekColumn(week)}
         </div>
       ))}
     </div>
