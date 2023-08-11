@@ -3,8 +3,6 @@ import LiftInput from "./LiftInput";
 import WorkoutGenerate from "./WorkoutGenerate";
 
 const WorkoutPlan = () => {
-  // ... (remaining imports and hook definitions)
-
   return (
     <div>
       <h2>Enter Weights and Reps Achieved</h2>
