@@ -1,5 +1,12 @@
 import React from "react";
 
+const roundToNearest5 = (value) => Math.floor(value / 5) * 5;
+
+const oneRepMax = (weight, reps) => weight * reps * 0.0333 + weight;
+
+const trainingMax = (oneRepMaxValue) => oneRepMaxValue * 0.85;
+
+
 const WorkoutGenerate = ({ lift, details, week, roundToNearest5 }) => {
   const oneRepMaxValue = oneRepMax(details.weightLifted, details.reps);
   const tMax = trainingMax(oneRepMaxValue);

@@ -1,14 +1,14 @@
 import React from "react";
 
-const LiftInput = ({ lift, lifts, handleInputChange }) => {
+const LiftInput = ({ lift, weightLifted, reps, handleInputChange }) => {
   return (
-    <div key={lift}>
+    <div>
       <label>{`${lift}: `}</label>
       Weight:
       <input
         type="number"
         name="weightLifted"
-        value={lifts[lift].weightLifted}
+        value={weightLifted}
         onChange={(e) => handleInputChange(e, lift)}
         placeholder="Weight Lifted"
       />
@@ -16,7 +16,7 @@ const LiftInput = ({ lift, lifts, handleInputChange }) => {
       <input
         type="number"
         name="reps"
-        value={lifts[lift].reps}
+        value={reps}
         onChange={(e) => handleInputChange(e, lift)}
         placeholder="Reps"
       />
