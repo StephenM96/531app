@@ -1,3 +1,6 @@
+import React from "react";
+import { useState } from "react";
+
 const WorkoutPlan = () => {
     const [lifts, setLifts] = useState({
       Squat: { day: 'Monday', weightLifted: 200, reps: 5 },
@@ -10,8 +13,6 @@ const WorkoutPlan = () => {
     
     const oneRepMax = (weight, reps) => weight * reps * 0.0333 + weight;
   
-    // const trainingMax = (oneRepMaxValue) => Math.floor(oneRepMaxValue * 0.85 / 5) * 5;
-    //would like to round, but state gets lost???
     const trainingMax = (oneRepMaxValue) => oneRepMaxValue * 0.85;
   
     const handleInputChange = (e, lift) => {
@@ -62,8 +63,6 @@ const WorkoutPlan = () => {
           <p>Main Sets:</p>
           <ul>
             {percentages.map((p, index) => (
-              // <li key={index}>{`${p * 100}% of training max: ${Math.floor(p * tMax / 5) * 5} lbs for 5 reps`}</li>
-              //would like to use this code, but state gets lost??
               <li key={index}>{`${p * 100}% of training max: ${roundToNearest5(p * tMax)} lbs for 5 reps`}</li>
             ))}
           </ul>
@@ -72,8 +71,6 @@ const WorkoutPlan = () => {
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                // <li key={index}>{`50% of training max: ${Math.floor(0.5 * tMax / 5) * 5} lbs for 10 reps`}</li>
-                //state gets lost??
                 <li key={index}>{`50% of training max: ${roundToNearest5(0.5 * tMax)} lbs for 10 reps`}</li>
               ))}
           </ul>
