@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    password: '',
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleInputChange = (e) => {
@@ -62,9 +62,13 @@ const SignupPage = () => {
           value={formData.password}
           onChange={handleInputChange}
         />
-        <button type="button" onClick={handleSignup}>Sign Up</button>
+        <button type="button" onClick={handleSignup}>
+          Sign Up
+        </button>
       </form>
-      <p>Already have an account? <Link to="/login">Login</Link></p>
+      <p>
+        Already have an account? <Link to="/login">Login</Link>
+      </p>
     </div>
   );
 };
