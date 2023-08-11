@@ -112,4 +112,6 @@ const WorkoutPlan = () => {
   );
 };
 
-export default WorkoutPlan;
+// export default WorkoutPlan;
+//removed export for testing and to keep working code for reference for timebeing...
+

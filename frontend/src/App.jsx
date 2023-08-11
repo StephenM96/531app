@@ -4,7 +4,7 @@ import LandingPage from "./components/LandingPage";
 import LoginPage from "./components/LoginPage";
 import Dashboard from "./components/Dashboard";
 import SignupPage from "./components/SignupPage";
-import WorkoutPlan from "./components/Workout";
+import WorkoutPlan from "./components/WorkoutPlan";
 import "./app.css";
 
 const App = () => {
