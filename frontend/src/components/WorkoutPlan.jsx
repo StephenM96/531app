@@ -6,10 +6,10 @@ const WorkoutPlan = () => {
   const roundToNearest5 = (value) => Math.floor(value / 5) * 5;
 
   const [lifts, setLifts] = useState({
-    Squat: { weightLifted: 200, reps: 5 },
-    Bench: { weightLifted: 150, reps: 5 },
-    Deadlift: { weightLifted: 250, reps: 5 },
-    OverheadPress: { weightLifted: 100, reps: 5 },
+    Squat: { day: "Monday", weightLifted: 200, reps: 5 },
+    Bench: { day: "Tuesday", weightLifted: 150, reps: 5 },
+    Deadlift: { day: "Thursday", weightLifted: 250, reps: 5 },
+    OverheadPress: { day: "Friday", weightLifted: 100, reps: 5 },
   });
 
   const handleInputChange = (e, lift) => {
@@ -24,14 +24,12 @@ const WorkoutPlan = () => {
     <div className="workout-container">
       <div className="header">
         <h2>Enter Weights and Reps Achieved</h2>
-        {Object.keys(lifts).map((lift) => (
-          <LiftInput
-            key={lift}
-            lift={lift}
-            lifts={lifts}
-            handleInputChange={handleInputChange}
-          />
-        ))}
+        <LiftInput
+          key={lifts}
+          lift={lifts}
+          lifts={lifts}
+          handleInputChange={handleInputChange}
+        />
         </div>
         <h2>3-Week Workout Plan</h2>
         <div className="weeks-container">

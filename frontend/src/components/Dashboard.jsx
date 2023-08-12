@@ -5,9 +5,11 @@ const Dashboard = () => {
   return (
     <div>
       <h2>User Dashboard</h2>
-      {/* Various dashboard components */}
+      {/* extra dashboard components */}
       <Link to="/workout-plan">View Workout Plan</Link>
+      <div>
       <Link to="/Workout">Placeholder link to individual workouts...</Link>
+      </div>
     </div>
   );
 };

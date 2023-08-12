@@ -1,7 +1,7 @@
 import React from "react";
 
 const LiftInput = ({ lift, weightLifted, reps, handleInputChange }) => {
-  return (
+  return Object.keys(lift).map((lift) => (
     <div>
       <label>{`${lift}: `}</label>
       Weight:
@@ -21,7 +21,7 @@ const LiftInput = ({ lift, weightLifted, reps, handleInputChange }) => {
         placeholder="Reps"
       />
     </div>
-  );
+  ));
 };
 
 export default LiftInput;
