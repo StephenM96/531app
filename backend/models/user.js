@@ -36,6 +36,8 @@ User.init(
     //   required: true,
     //   unique: true,
     // },
+  //check out for a create table method for sequelize
+
     password: {
       type: DataTypes.STRING,
       allowNull: false,
