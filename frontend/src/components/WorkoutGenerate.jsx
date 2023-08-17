@@ -6,10 +6,12 @@ const oneRepMax = (weight, reps) => weight * reps * 0.0333 + weight;
 
 const trainingMax = (oneRepMaxValue) => oneRepMaxValue * 0.85;
 
-
 const WorkoutGenerate = ({ lift, details, week, roundToNearest5 }) => {
   const oneRepMaxValue = oneRepMax(details.weightLifted, details.reps);
   const tMax = trainingMax(oneRepMaxValue);
+  const startDate = new Date();
+  const currentDate = new Date(startDate); //calculate date for current workout day
+  currentDate.setDate(currentDate.getDate() + (week-1) * 7); //adjust date based on week
   const percentages =
     week === 1
       ? [0.65, 0.75, 0.85]
@@ -19,7 +21,7 @@ const WorkoutGenerate = ({ lift, details, week, roundToNearest5 }) => {
 
   return (
     <div key={lift}>
-      <h3>{`${lift} Day (Week ${week})`}</h3>
+      <h3>{`${lift} Day (Week ${week}) - ${currentDate.toDateString()}`}</h3>
       <p>Main Sets:</p>
       <ul>
         {percentages.map((p, index) => (

@@ -4,6 +4,11 @@
   align-items: center;
 }
 
+.mmx-container {
+  display: flex;
+  align-content: right;
+}
+
 .weeks-container {
   display: flex;
   flex-direction: row;

@@ -1,6 +1,12 @@
 import React from "react";
 
-const LiftInput = ({ lift, weightLifted, reps, handleInputChange }) => {
+const LiftInput = ({
+  lift,
+  weightLifted,
+  reps,
+  handleInputChange,
+  startDate,
+}) => {
   return Object.keys(lift).map((lift) => (
     <div>
       <label>{`${lift}: `}</label>
@@ -19,6 +25,13 @@ const LiftInput = ({ lift, weightLifted, reps, handleInputChange }) => {
         value={reps}
         onChange={(e) => handleInputChange(e, lift)}
         placeholder="Reps"
+      />
+      Start Date:
+      <input
+        type="date"
+        name="startDate"
+        value={startDate}
+        onChange={(e) => handleInputChange(e, lift)}
       />
     </div>
   ));
