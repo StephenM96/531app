@@ -30,18 +30,36 @@ User.init(
       required: true,
       unique: true,
     },
-    // userName: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    //   required: true,
-    //   unique: true,
-    // },
-  //check out for a create table method for sequelize
+
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      required: true,
+      unique: true,
+    },
+    //check out for a create table method for sequelize
 
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       required: true,
+    },
+
+    squatOriginalMaxWeight: DataTypes.INTEGER,
+    benchOriginalMaxWeight: DataTypes.INTEGER,
+    deadliftOriginalMaxWeight: DataTypes.INTEGER,
+    overheadPressOriginalMaxWeight: DataTypes.INTEGER,
+    squatOriginalMaxReps: DataTypes.INTEGER,
+    benchOriginalMaxReps: DataTypes.INTEGER,
+    deadliftOriginalMaxReps: DataTypes.INTEGER,
+    overheadPressOriginalMaxReps: DataTypes.INTEGER,
+    workoutID: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: "workout", //name of the model - come back to this...
+        key: "id",
+      },
     },
   },
   {
