@@ -5,6 +5,9 @@ import MaxValuesDisplay from "./MaxValuesDisplay";
 
 const WorkoutPlan = () => {
   const [startDate, setStartDate] = useState(""); // State for the start date
+  const handlePrint = () => {
+    window.print();
+  };
 
   // Calculate the workout dates for each day
   const calculateWorkoutDates = () => {
@@ -97,6 +100,9 @@ const WorkoutPlan = () => {
           startDate={startDate}
         />
         <MaxValuesDisplay className="max-value" lifts={lifts} />
+      </div>
+      <div>
+        <button onClick={handlePrint}>Print Workout Plan</button>
       </div>
       <h2>3-Week Workout Plan</h2>
       <div className="weeks-container">

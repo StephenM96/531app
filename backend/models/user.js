@@ -53,14 +53,14 @@ User.init(
     benchOriginalMaxReps: DataTypes.INTEGER,
     deadliftOriginalMaxReps: DataTypes.INTEGER,
     overheadPressOriginalMaxReps: DataTypes.INTEGER,
-    workoutID: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: "workout", //name of the model - come back to this...
-        key: "id",
-      },
-    },
+    // workoutID: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: true,
+    //   references: {
+    //     model: "workout", //name of the model - come back to this...
+    //     key: "id",
+    //   },
+    // },
   },
   {
     sequelize: sequelizeInstance,

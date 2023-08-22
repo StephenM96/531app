@@ -39,7 +39,7 @@ Workout.init(
   },
   {
     sequelize: sequelizeInstance,
-    modelName: "users",
+    modelName: "Workout",
     timestamps: true,
     freezeTableName: true,
     defaultScope: {

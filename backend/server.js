@@ -7,11 +7,13 @@ let dbConnect = require('./dbConnect')
 
 const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/authRoutes')
+const workoutRoutes = require('./routes/workoutRoutes')
 
 app.use(express.json())
 
 app.use('/api/users', userRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/workouts', workoutRoutes)
 
 app.get("/", (req, res) => {
     res.json({message: "Hello world!"})
