@@ -5,7 +5,7 @@ const Models = require("../models");
 const getWorkouts = (res) => {
   Models.Workout.findAll({})
     .then((data) => {
-      res.send({ result: 200, data: data.values });
+      res.send({ result: 200, data: data });
     })
     .catch((err) => {
       console.log("Error:", err);

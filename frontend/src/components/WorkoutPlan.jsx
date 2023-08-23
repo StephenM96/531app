@@ -26,7 +26,7 @@ const WorkoutPlan = () => {
 
     if (startDate) {
       const startDateObj = new Date(startDate);
-      const startDayOfWeek = startDateObj.getrDay();
+      const startDayOfWeek = startDateObj.getDay();
 
       // Map lifts to corresponding days
       const liftToDayMapping = {
