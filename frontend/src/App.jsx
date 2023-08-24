@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import SignupPage from "./components/SignupPage";
 import WorkoutPlan from "./components/WorkoutPlan";
 import "./app.css";
+import WorkoutArchive from "./components/WorkoutArchive";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/sign-up" element={<SignupPage />} />
         <Route path="/workout-plan" element={<WorkoutPlan />} />
+        <Route path="/workout-archive" element={<WorkoutArchive />} />
       </Routes>
     </BrowserRouter>
   );

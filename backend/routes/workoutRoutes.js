@@ -6,7 +6,7 @@ const Controllers = require('../controllers')
 //localhost:8000/api/ <<--base route
 //localhost:8000/api/workouts/
 router.get("/", (req, res) => {
-  console.log("Workouts: ", Controllers.workoutController.getWorkouts(res))
+  Controllers.workoutController.getWorkouts(res)
 })
 
 //localhost:8000/api/workouts/:<workout_id>

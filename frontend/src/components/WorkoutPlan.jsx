@@ -9,6 +9,12 @@ const WorkoutPlan = () => {
     window.print();
   };
 
+  const handleSaveWorkout = (week, date, lift) => {
+    setArchivedWorkouts((prevWorkouts) => [
+      ...prevWorkouts, { week, date, lift }
+    ]);
+  };
+
   // Calculate the workout dates for each day
   const calculateWorkoutDates = () => {
     const daysInWeek = 7;
@@ -116,7 +122,8 @@ const WorkoutPlan = () => {
                 details={lifts[lift]}
                 week={week}
                 roundToNearest5={roundToNearest5}
-                workoutDate={workoutDates[(week - 1) * 7]}
+                // workoutDate={workoutDates[(week - 1) * 7]}
+                onSaveWorkout={handleSaveWorkout} //saves workout
               />
             ))}
           </div>

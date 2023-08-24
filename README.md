@@ -11,10 +11,29 @@ Need to do:
 
 -Add calendar dropdown? Plan workouts through the calendar
 
+
+User Model JSON: 
 {
-    "id":"",
+    "firstName": "",
+    "lastName": "",
+    "userName": "",
+    "email": "",
+    "password": "",
+    "squatOriginalMaxWeight": "",
+    "benchOriginalMaxWeight": "",
+    "deadliftOriginalMaxWeight": "",
+    "overheadPressOriginalMaxWeight": "",
+    "squatOriginalMaxReps": "",
+    "benchOriginalMaxReps": "",
+    "deadliftOriginalMaxReps": "",
+    "overheadPressOriginalMaxReps": ""
+}
+
+Workout Model JSON:
+{
     "startDate:": "",
-    "squatWeek": "",
+    "endDate:": "",
+    "squatEst1rm": "",
     "benchEst1rm": "",
     "deadliftEst1rm": "",
     "overheadPressEst1rm": "",
@@ -28,10 +47,10 @@ Need to do:
     "benchWeek1": "",
     "benchWeek2": "",
     "benchWeek3": "",
-    "squatWeek1": "",
-    "squatWeek2": "",
-    "squatWeek3": "",
-    "squatWeek1": "",
-    "squatWeek2": "",
-    "squatWeek3": "",
+    "deadliftWeek1": "",
+    "deadliftWeek2": "",
+    "deadliftWeek3": "",
+    "ohpWeek1": "",
+    "ohpWeek2": "",
+    "ohpWeek3": ""
 }
