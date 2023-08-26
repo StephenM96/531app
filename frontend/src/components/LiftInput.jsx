@@ -26,13 +26,6 @@ const LiftInput = ({
         onChange={(e) => handleInputChange(e, lift)}
         placeholder="Reps"
       />
-      Start Date:
-      <input
-        type="date"
-        name="startDate"
-        value={startDate}
-        onChange={(e) => handleInputChange(e, lift)}
-      />
     </div>
   ));
 };

@@ -67,7 +67,7 @@ const WorkoutPlan = () => {
     return workoutDates;
   };
 
-  const workoutDates = calculateWorkoutDates();
+  // const workoutDates = calculateWorkoutDates();
 
   const roundToNearest5 = (value) => Math.floor(value / 5) * 5;
 
@@ -103,7 +103,6 @@ const WorkoutPlan = () => {
           lift={lifts}
           lifts={lifts}
           handleInputChange={handleInputChange}
-          startDate={startDate}
         />
         <MaxValuesDisplay className="max-value" lifts={lifts} />
       </div>
@@ -117,6 +116,7 @@ const WorkoutPlan = () => {
             {Object.keys(lifts).map((lift) => (
               <WorkoutGenerate
                 className="day-column"
+                startDate={startDate}
                 key={lift}
                 lift={lift}
                 details={lifts[lift]}
