@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const LoginPage = () => {
@@ -8,7 +8,10 @@ const LoginPage = () => {
     password: "",
   });
 
+  let navigate = useNavigate()
+
   const handleInputChange = (e) => {
+    e.preventDefault();
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -16,45 +19,35 @@ const LoginPage = () => {
     });
   };
 
-  // const handleLogin = () => {
-  //   // Call authentication API here using formData
-  //   // Redirect to dashboard on successful login
-  // };
-  //placeholder until I can connect to login auth backend
+  fetch("http://localhost:8000/api/auth/login", {
+    method: "POST",
+    body: JSON.stringify(formData),
+    //can use formData here instead of data like in Robert's repo and it seems to give a different error, but seems
+    //on the right track?
+    //I used formData in my LoginPage.jsx component. That's why I changed it. I'll keep going down this route to 
+    //troubleshoot...
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json.result);
+    });
 
-  //     const username = useRef("");
-  // const email = useRef("");
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   // Validate the username
-  //   if (!username.current.value.match(/^[a-zA-Z0-9]{3,16}$/)) {
-  //     alert("Please enter a valid username");
-  //     return;
-  //   }
-
-  //   // Validate the email
-  //   if (!email.current.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/)) {
-  //     alert("Please enter a valid email");
-  //     return;
-  //   }
-
-  //   // Submit the form
-  //   // ...
-  // };
-  //Can use a code like this to validate username OR email??? Will have to play with it some more
+  navigate("/dashboard");
 
   return (
     <div className="log-in container">
       <h2>Log In</h2>
       <form>
-        <label>Username or Email:</label>
+        {/* <label>Username or Email:</label>
         <input
           type="text"
           name="username"
           value={formData.username}
           onChange={handleInputChange}
-        />
+        /> */}
         {/* add functionality for both email and user here */}
         <label>Email:</label>
         <input
@@ -72,9 +65,9 @@ const LoginPage = () => {
         />
         {/* <button type="button" onClick={handleSignup}>Log In</button> */}
         {/* set to just redirect to dashboard at this moment... Need to set up with proper auth now */}
-        <Link to="/dashboard">
-          Log In.. Placeholder until log in auth is linked to backend properly
-        </Link>
+        <button onClick={handleInputChange}>
+        Log In
+        </button>
       </form>
       <p>
         Don't have an account? <Link to="/sign-up">Create Account!</Link>

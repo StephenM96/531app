@@ -5,6 +5,15 @@ require('dotenv').config()
 
 let dbConnect = require('./dbConnect')
 
+const Models = require("./models")
+
+async function init() {
+    await Models.User.sync(),
+    await Models.Workout.sync()
+}
+
+init()
+
 const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/authRoutes')
 const workoutRoutes = require('./routes/workoutRoutes')
