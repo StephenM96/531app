@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    username: "",
     email: "",
-    password: "",
+    password: ""
   });
+  const [error, setError] = useState("");
+
+  let navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,9 +20,30 @@ const SignupPage = () => {
     });
   };
 
-  const handleSignup = () => {
-    // Call registration API here using formData
-    // Redirect to login page on successful registration
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+
+    fetch("http://localhost:8000/api/auth/signup", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        if (json.success) {
+          //if response success = true
+          // NOTE: look at the response from the API, it does not return json.data as an array
+          sessionStorage.setItem("authenticated", json.success); //this sets the login auth to true so the user doesn't have to login after signing up
+          sessionStorage.setItem("id", json.data.id);
+          navigate("/dashboard");
+        } else {
+          setError(json.message.errors[0].message);
+        }
+      });
   };
 
   return (
@@ -41,13 +64,6 @@ const SignupPage = () => {
           value={formData.lastName}
           onChange={handleInputChange}
         />
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleInputChange}
-        />
         <label>Email:</label>
         <input
           type="email"
@@ -62,7 +78,8 @@ const SignupPage = () => {
           value={formData.password}
           onChange={handleInputChange}
         />
-        <button type="button" onClick={handleSignup}>
+        {error ? <p>{error}</p> : null}
+        <button type="button" onClick={handleSubmit}>
           Sign Up
         </button>
       </form>

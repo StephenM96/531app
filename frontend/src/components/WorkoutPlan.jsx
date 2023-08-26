@@ -15,60 +15,19 @@ const WorkoutPlan = () => {
     ]);
   };
 
-  // Calculate the workout dates for each day
-  const calculateWorkoutDates = () => {
-    const daysInWeek = 7;
-    const weeksInCycle = 3;
-    const dayNames = [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ];
-    const workoutDates = [];
+  const liftsOrder = ["Squat", "Bench", "Deadlift", "OverheadPress"];
 
-    if (startDate) {
-      const startDateObj = new Date(startDate);
-      const startDayOfWeek = startDateObj.getDay();
-
-      // Map lifts to corresponding days
-      const liftToDayMapping = {
-        Squat: "Monday",
-        Bench: "Tuesday",
-        Deadlift: "Thursday",
-        OverheadPress: "Friday",
-      };
-
-      for (let week = 1; week <= weeksInCycle; week++) {
-        for (let day = 0; day < daysInWeek; day++) {
-          const date = new Date(startDateObj); // Get the day of the week for the start date
-          const daysToAdd = (week - 1) * daysInWeek + day;
-          date.setDate(startDateObj.getDate() + daysToAdd);
-
-          // Find the lift associated with the current day
-          const liftForDay = Object.keys(liftToDayMapping).find(
-            (lift) =>
-              liftToDayMapping[lift] ===
-              dayNames[(startDayOfWeek + day) % daysInWeek]
-          );
-          workoutDates.push({
-            week,
-            day: dayNames[(startDayOfWeek + day) % daysInWeek],
-            date,
-            lift: liftForDay,
-          });
-        }
-      }
+  const calculateDayOffset = (lift, week) => {
+    const baseOffsets = {
+      "Squat": 0,  //Monday
+      "Bench": 1,  //Tuesday
+      "Deadlift": 3, //Thursday
+      "OverheadPress": 4 //Friday
     }
 
-    return workoutDates;
-  };
-
-  // const workoutDates = calculateWorkoutDates();
-
+    return baseOffsets[lift] + (week-1) * 7; //7 days in week
+  }
+  
   const roundToNearest5 = (value) => Math.floor(value / 5) * 5;
 
   const [lifts, setLifts] = useState({
@@ -113,10 +72,11 @@ const WorkoutPlan = () => {
       <div className="weeks-container">
         {Array.from({ length: 3 }, (_, i) => i + 1).map((week) => (
           <div key={week} className="week-column">
-            {Object.keys(lifts).map((lift) => (
+            {liftsOrder.map((lift) => (
               <WorkoutGenerate
                 className="day-column"
                 startDate={startDate}
+                dayOffset={calculateDayOffset(lift, week)} 
                 key={lift}
                 lift={lift}
                 details={lifts[lift]}

@@ -7,9 +7,13 @@ require("dotenv").config();
 let dbConnect = require("./dbConnect");
 
 const Models = require("./models");
+const Seeds = require("./seeds")
 
 async function init() {
   await Models.User.sync(), await Models.Workout.sync();
+  await Seeds.Users.seedUsers();
+  await Models.Workout.sync()
+  // await seedWorkouts.Workout.seedWorkouts();
 }
 
 init();

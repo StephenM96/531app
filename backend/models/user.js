@@ -31,12 +31,12 @@ User.init(
       unique: true,
     },
 
-    userName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      required: true,
-      unique: true,
-    },
+    // userName: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   required: true,
+    //   unique: true,
+    // },
     //check out for a create table method for sequelize
 
     password: {
