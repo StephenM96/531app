@@ -42,10 +42,10 @@ const loginUserByEmail = (req, res) => {
     .then((data) => {
       //If email exists in the database, pull the stored password (which is hashed)
       //and compare it to the payload from the request body
-      if(data,length > 0) {
+      if(data.length > 0) {
         if(data && bcrypt.compareSync(unhashedPassword, data[0].dataValues.password)){
           data[0].dataValues.password = undefined //removes key from response
-          res.statu(200).send({ success: true, data: data})
+          res.status(200).send({ success: true, data: data})
         } else {
           console.log('Password or username is incorrect')
           res.status(403).send({ success: false, message: "Wrong username or password!"})
