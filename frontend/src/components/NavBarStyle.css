@@ -31,4 +31,5 @@ body {
 
   .topnavItems {
     /* something goes here to reduce left space on topnav??? */
+    float: left;
   }
