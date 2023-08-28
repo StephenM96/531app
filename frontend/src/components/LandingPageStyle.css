@@ -1,0 +1,10 @@
+body {
+    background-image: url("../assets/landingPageBackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+label {
+    font-family: "Raleway", sans-serif;
+    font-size: 11pt;
+  }

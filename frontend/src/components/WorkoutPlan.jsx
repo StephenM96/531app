@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LiftInput from "./LiftInput";
 import WorkoutGenerate from "./WorkoutGenerate";
 import MaxValuesDisplay from "./MaxValuesDisplay";
+import "./WorkoutPlanStyle.css"
 
 const WorkoutPlan = () => {
   const [startDate, setStartDate] = useState(""); // State for the start date

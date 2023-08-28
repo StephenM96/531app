@@ -1,27 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import "./NavBarStyle.css"
 
 const Navbar = () => {
   const isAuthenticated = sessionStorage.getItem("authenticated") || false;
 
   return (
-    <nav>
+    <nav className="topnav">
       <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
+          <Link to="/" className="active">Home</Link>
         {isAuthenticated ? (
           <>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/workout-plan">Make a plan!</Link>
-            </li>
-            <li>
-              <Link to="/archive">Workout Archive</Link>
-            </li>
+                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/workout-plan">Make a plan!</Link>
+                <Link to="/archive">Workout Archive</Link>
           </>
         ) : null}
       </ul>
@@ -30,3 +23,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
