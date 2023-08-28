@@ -3,10 +3,6 @@ body {
     font-family: "Raleway", sans-serif;
   }
 
-  .topNavList {
-    display: flex;
-    align-items: left;
-  }
   
   .topnav {
     overflow: hidden;
@@ -31,4 +27,8 @@ body {
   .topnav a.active {
     background-color: #2dbd6e;
     color: white;
+  }
+
+  .topnavItems {
+    /* something goes here to reduce left space on topnav??? */
   }

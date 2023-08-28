@@ -8,6 +8,7 @@ const Navbar = () => {
 
   return (
     <nav className="topnav">
+      <div className="topnavItems">
       <ul>
           <Link to="/" className="active">Home</Link>
         {isAuthenticated ? (
@@ -18,6 +19,7 @@ const Navbar = () => {
           </>
         ) : null}
       </ul>
+      </div>
     </nav>
   );
 };
