@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LiftInput from "./LiftInput";
 import WorkoutGenerate from "./WorkoutGenerate";
 import MaxValuesDisplay from "./MaxValuesDisplay";
-import "./WorkoutPlanStyle.css"
+import "./WorkoutPlanStyle.css";
 
 const WorkoutPlan = () => {
   const [startDate, setStartDate] = useState(""); // State for the start date
@@ -12,7 +12,8 @@ const WorkoutPlan = () => {
 
   const handleSaveWorkout = (week, date, lift) => {
     setArchivedWorkouts((prevWorkouts) => [
-      ...prevWorkouts, { week, date, lift }
+      ...prevWorkouts,
+      { week, date, lift },
     ]);
   };
 
@@ -20,15 +21,15 @@ const WorkoutPlan = () => {
 
   const calculateDayOffset = (lift, week) => {
     const baseOffsets = {
-      "Squat": 0,  //Monday
-      "Bench": 1,  //Tuesday
-      "Deadlift": 3, //Thursday
-      "OverheadPress": 4 //Friday
-    }
+      Squat: 0, //Monday
+      Bench: 1, //Tuesday
+      Deadlift: 3, //Thursday
+      OverheadPress: 4, //Friday
+    };
 
-    return baseOffsets[lift] + (week-1) * 7; //7 days in week
-  }
-  
+    return baseOffsets[lift] + (week - 1) * 7; //7 days in week
+  };
+
   const roundToNearest5 = (value) => Math.floor(value / 5) * 5;
 
   const [lifts, setLifts] = useState({
@@ -58,26 +59,29 @@ const WorkoutPlan = () => {
       />
       <div className="header">
         <h2>Enter Weights and Reps Achieved</h2>
-        <LiftInput
-          key={lifts}
-          lift={lifts}
-          lifts={lifts}
-          handleInputChange={handleInputChange}
-        />
+        <div className="lift-inputs">
+          <LiftInput
+            key={lifts}
+            lift={lifts}
+            lifts={lifts}
+            handleInputChange={handleInputChange}
+          />
+        </div>
         <MaxValuesDisplay className="max-value" lifts={lifts} />
       </div>
+
       <div>
         <button onClick={handlePrint}>Print Workout Plan</button>
       </div>
       <h2>3-Week Workout Plan</h2>
       <div className="weeks-container">
         {Array.from({ length: 3 }, (_, i) => i + 1).map((week) => (
-          <div key={week} className="week-column">
+          <div key={week} className="week-container">
             {liftsOrder.map((lift) => (
               <WorkoutGenerate
                 className="day-column"
                 startDate={startDate}
-                dayOffset={calculateDayOffset(lift, week)} 
+                dayOffset={calculateDayOffset(lift, week)}
                 key={lift}
                 lift={lift}
                 details={lifts[lift]}

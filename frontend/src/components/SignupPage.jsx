@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./SignupPageStyle.css";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    password: ""
+    password: "",
   });
   const [error, setError] = useState("");
 
@@ -47,45 +48,75 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="signup-container">
-      <h2>Sign Up</h2>
-      <form>
-        <label>First Name:</label>
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleInputChange}
-        />
-        <label>Last Name:</label>
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleInputChange}
-        />
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        {error ? <p>{error}</p> : null}
-        <button type="button" onClick={handleSubmit}>
-          Sign Up
-        </button>
-      </form>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+    <div id="card">
+      <div id="card-content">
+        <div id="card-title">
+          <h2>SIGN UP</h2>
+          <div className="underline-title"></div>
+        </div>
+        <form className="form">
+          <label for="first-name" id="first-name">
+            First Name:
+          </label>
+          <input
+            id="first-name"
+            className="form-content"
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleInputChange}
+          />
+          <div className="form-border"></div>
+          <label for="last-name" id="last-name">
+            Last Name:
+          </label>
+          <input
+            id="last-name"
+            className="form-content"
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleInputChange}
+          />
+          <div className="form-border"></div>
+          <label for="user-email" id="user-email">
+            Email:
+          </label>
+          <input
+            id="user-email"
+            className="form-content"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+          <div className="form-border"></div>
+          <label for="user-password" id="user-password">
+            Password:
+          </label>
+          <>
+          <input
+            id="user-password"
+            className="form-content"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+          </>
+          <div className="form-border"></div>
+          {error ? <p>{error}</p> : null}
+          <button id="submit-btn" type="button" onClick={handleSubmit}>
+            SIGN UP
+          </button>
+        </form>
+        <p>
+          Already have an account?{" "}
+          <Link to="/login" id="login">
+            Login
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };
