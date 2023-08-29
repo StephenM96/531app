@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className="page-container">
       <h2>User Dashboard</h2>
       {/* extra dashboard components */}
       {/* <label>Squat Max Weight:</label>

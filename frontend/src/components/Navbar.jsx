@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./NavBarStyle.css"
 
 const Navbar = () => {
-  const isAuthenticated = sessionStorage.getItem("authenticated") || false;
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  useEffect (() =>{
+    setIsAuthenticated(sessionStorage.getItem("authenticated"))
+  }, [])
 
   return (
     <nav className="topnav">

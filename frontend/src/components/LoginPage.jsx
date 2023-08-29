@@ -49,43 +49,54 @@ const LoginPage = () => {
   };
 
   return (
-    <div id="card">
-      <div id="card-content">
-        <div id="card-title">
-          <h2>LOGIN</h2>
-          <div className="underline-title"></div>
-        </div>
-        <div className="log-in-form">
-          <form className="form">
-            <label for="user-email" id="email-label">Email:</label>
-            <input
-              id="user-email"
-              className="form-content"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-            <div className="form-border"></div>
-            <label for="user-password" id="password-label">Password:</label>
-            <input
-              id="user-password"
-              className="form-content"
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-            />
-            <div className="form-border"></div>
-            <a href="#">
-          <legend id="forgot-pass">Forgot password?</legend>
-        </a>
-            {error ? <p>{error}</p> : null}
-            <button id="submit-btn" onClick={handleSubmit}>LOGIN</button>
-          </form>
-          <p>
-            Don't have an account? <Link to="/sign-up" id="sign-up">Create Account!</Link>
-          </p>
+    <div className="page-container">
+      <div id="card">
+        <div id="card-content">
+          <div id="card-title">
+            <h2>LOGIN</h2>
+            <div className="underline-title"></div>
+          </div>
+          <div className="log-in-form">
+            <form className="form">
+              <label for="user-email" id="email-label">
+                Email:
+              </label>
+              <input
+                id="user-email"
+                className="form-content"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+              <div className="form-border"></div>
+              <label for="user-password" id="password-label">
+                Password:
+              </label>
+              <input
+                id="user-password"
+                className="form-content"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+              <div className="form-border"></div>
+              <a href="#">
+                <legend id="forgot-pass">Forgot password?</legend>
+              </a>
+              {error ? <p>{error}</p> : null}
+              <button id="submit-btn" onClick={handleSubmit}>
+                LOGIN
+              </button>
+            </form>
+            <p>
+              Don't have an account?{" "}
+              <Link to="/sign-up" id="sign-up">
+                Create Account!
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

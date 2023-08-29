@@ -1,51 +1,7 @@
-/* .workout-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#root {
+  background-image: url("./assets/landingPageBackground.jpg");
+  /* height: 100%; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
-.mmx-container {
-  display: flex;
-  align-content: right;
-}
-
-.weeks-container {
-  display: flex;
-  flex-direction: row;
-  margin: 1rem;
-  column-gap: 3rem;
-  
-}
-
-.day-column {
-  display: flex;
-  flex-direction: column;
-  margin: 0.5rem;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.day-header {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.sets-list {
-  list-style: none;
-  padding: 0;
-}
-
-.sets-item {
-  margin: 0.2rem 0;
-}
-
-.accessory-list {
-  list-style: disc;
-  padding-left: 1rem;
-  margin: 0;
-}
-
-.accessory-item {
-  margin: 0.2rem 0;
-} */

@@ -8,6 +8,7 @@ import WorkoutPlan from "./components/WorkoutPlan";
 import "./app.css";
 import WorkoutArchive from "./components/WorkoutArchive";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const App = () => {
 
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/workout-plan" element={<WorkoutPlan />} />
         <Route path="/workout-archive" element={<WorkoutArchive />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
