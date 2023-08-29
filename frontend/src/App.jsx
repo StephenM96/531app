@@ -12,6 +12,11 @@ import Footer from "./components/Footer";
 
 const App = () => {
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  useEffect (() =>{
+    setIsAuthenticated(sessionStorage.getItem("authenticated"))
+  }, [])
+
   const [data, setData] = useState([])
 
   useEffect(() => {
@@ -30,11 +35,11 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar isAuthenticated={isAuthenticated}/>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/sign-up" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated}/>} />
+        <Route path="/sign-up" element={<SignupPage setIsAuthenticated={setIsAuthenticated}/>} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/workout-plan" element={<WorkoutPlan />} />
         <Route path="/workout-archive" element={<WorkoutArchive />} />

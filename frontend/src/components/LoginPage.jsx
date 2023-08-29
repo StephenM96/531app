@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./LoginPageStyle.css";
 
-const LoginPage = () => {
+const LoginPage = ({setIsAuthenticated}) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -39,6 +39,7 @@ const LoginPage = () => {
           //if response is successful = true
           sessionStorage.setItem("authenticated", json.success);
           sessionStorage.setItem("id", json.data[0].id);
+          setIsAuthenticated(sessionStorage.getItem("authenticated"))
           navigate("/dashboard");
         } else {
           setError(json.message);

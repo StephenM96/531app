@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./SignupPageStyle.css";
 
-const SignupPage = () => {
+const SignupPage = ({setIsAuthenticated}) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -40,6 +40,7 @@ const SignupPage = () => {
           // NOTE: look at the response from the API, it does not return json.data as an array
           sessionStorage.setItem("authenticated", json.success); //this sets the login auth to true so the user doesn't have to login after signing up
           sessionStorage.setItem("id", json.data.id);
+          setIsAuthenticated(sessionStorage.getItem("authenticated"))
           navigate("/dashboard");
         } else {
           setError(json.message.errors[0].message);
