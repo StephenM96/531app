@@ -4,23 +4,29 @@ import WorkoutGenerate from "./WorkoutGenerate";
 import MaxValuesDisplay from "./MaxValuesDisplay";
 import "./WorkoutPlanStyle.css";
 
-const WorkoutPlan = () => {
+const WorkoutPlan = ({setArchivedWorkouts}) => {
   const [startDate, setStartDate] = useState(""); // State for the start date
+  const liftsOrder = ["Squat", "Bench", "Deadlift", "OverheadPress"];
+  const [lifts, setLifts] = useState({
+    Squat: { day: "Monday", weightLifted: 200, reps: 5 },
+    Bench: { day: "Tuesday", weightLifted: 150, reps: 5 },
+    Deadlift: { day: "Thursday", weightLifted: 250, reps: 5 },
+    OverheadPress: { day: "Friday", weightLifted: 100, reps: 5 },
+  });
+
   const handlePrint = () => {
     window.print();
   };
 
-  const [archivedWorkouts, setArchivedWorkouts] = useState([]);
   const handleSaveWorkout = () => {
     const workoutDetails = {
       lifts: lifts,
       startDate: startDate,
     };
+    console.log("save", workoutDetails)
 
     setArchivedWorkouts((prevWorkouts) => [...prevWorkouts, workoutDetails]);
   };
-
-  const liftsOrder = ["Squat", "Bench", "Deadlift", "OverheadPress"];
 
   const calculateDayOffset = (lift, week) => {
     const baseOffsets = {
@@ -35,13 +41,6 @@ const WorkoutPlan = () => {
 
   const roundToNearest5 = (value) => Math.floor(value / 5) * 5;
 
-  const [lifts, setLifts] = useState({
-    Squat: { day: "Monday", weightLifted: 200, reps: 5 },
-    Bench: { day: "Tuesday", weightLifted: 150, reps: 5 },
-    Deadlift: { day: "Thursday", weightLifted: 250, reps: 5 },
-    OverheadPress: { day: "Friday", weightLifted: 100, reps: 5 },
-  });
-
   const handleInputChange = (e, lift) => {
     const { name, value } = e.target;
     setLifts({
@@ -49,7 +48,6 @@ const WorkoutPlan = () => {
       [lift]: { ...lifts[lift], [name]: Number(value) },
     });
   };
-
 
   return (
     <div className="workout-container">
@@ -73,7 +71,7 @@ const WorkoutPlan = () => {
       </div>
 
       <div>
-      <button onClick={handleSaveWorkout}>Save Workout</button>
+        <button onClick={handleSaveWorkout}>Save Workout</button>
       </div>
       <div>
         <button onClick={handlePrint}>Print Workout Plan</button>

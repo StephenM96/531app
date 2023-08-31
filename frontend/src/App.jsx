@@ -43,8 +43,8 @@ const App = () => {
         <Route path="/" element={<LoginPage setIsAuthenticated={setIsAuthenticated}/>} />
         <Route path="/sign-up" element={<SignupPage setIsAuthenticated={setIsAuthenticated}/>} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/workout-plan" element={<WorkoutPlan />} />
-        <Route path="/workout-archive" element={<WorkoutArchive archivedWorkouts={archivedWorkouts}/>} />
+        <Route path="/workout-plan" element={<WorkoutPlan setArchivedWorkouts={setArchivedWorkouts}/>} />
+        <Route path="/workout-archive" element={<WorkoutArchive archivedWorkouts={archivedWorkouts} setArchivedWorkouts={setArchivedWorkouts}/>} />
       </Routes>
       <Footer />
     </BrowserRouter>
