@@ -6,19 +6,17 @@ footer{
     width: 100vw;
     padding-top: 40px;
     color: #fff;
-    background-color: #333;
   }
   
   .footer-content{
-    display: flex;
-    align-items: center;
+    align-items: right;
     justify-content: center;
     flex-direction: column;
     text-align: center;
   }
 
   .footer-links {
-        list-style-type: none;
+    list-style-type: none;
   }
   
   .footer-content h3{

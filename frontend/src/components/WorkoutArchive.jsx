@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const WorkoutArchive = () => {
-    // set archive state
+
     const [archivedWorkouts, setArchivedWorkouts] = useState([]);
 
     return (

@@ -50,7 +50,6 @@ const WorkoutPlan = () => {
     });
   };
 
-  // const startDate = new Date();
 
   return (
     <div className="workout-container">
@@ -93,7 +92,6 @@ const WorkoutPlan = () => {
                 details={lifts[lift]}
                 week={week}
                 roundToNearest5={roundToNearest5}
-                // workoutDate={workoutDates[(week - 1) * 7]}
               />
             ))}
           </div>

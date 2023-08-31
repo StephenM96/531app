@@ -1,6 +1,5 @@
 import React from "react";
 
-// const roundToNearest5 = (value) => Math.floor(value / 5) * 5;
 
 const oneRepMax = (weight, reps) => weight * reps * 0.0333 + weight;
 
@@ -11,9 +10,7 @@ const WorkoutGenerate = ({ lift, details, week, roundToNearest5, workoutDate, on
   const tMax = trainingMax(oneRepMaxValue);
   // const startDate = new Date();
   const currentDate = new Date(startDate); //calculate date for current workout day
-  // console.log("Before: ", currentDate)
   currentDate.setDate(currentDate.getDate() + dayOffset); //adjust date based on week
-  // console.log(currentDate)
   const displayDate = currentDate.toUTCString()
   const percentages =
     week === 1
