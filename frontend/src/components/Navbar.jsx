@@ -15,7 +15,7 @@ const Navbar = ({ isAuthenticated }) => {
             <>
               <Link to="/dashboard">Dashboard</Link>
               <Link to="/workout-plan">Make a plan!</Link>
-              <Link to="/archive">Workout Archive</Link>
+              <Link to="/workout-archive">Workout Archive</Link>
             </>
           ) : null}
         </ul>

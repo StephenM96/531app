@@ -114,7 +114,7 @@ const SignupPage = ({setIsAuthenticated}) => {
           </form>
           <p>
             Already have an account?{" "}
-            <Link to="/login" id="login">
+            <Link to="/" id="login">
               Login
             </Link>
           </p>

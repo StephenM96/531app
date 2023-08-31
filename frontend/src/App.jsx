@@ -12,6 +12,8 @@ import Footer from "./components/Footer";
 
 const App = () => {
 
+  const [archivedWorkouts, setArchivedWorkouts] = useState([]);
+
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   useEffect (() =>{
     setIsAuthenticated(sessionStorage.getItem("authenticated"))
@@ -37,12 +39,12 @@ const App = () => {
     <BrowserRouter>
       <Navbar isAuthenticated={isAuthenticated}/>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated}/>} />
+        {/* <Route path="/" element={<LandingPage />} /> */}
+        <Route path="/" element={<LoginPage setIsAuthenticated={setIsAuthenticated}/>} />
         <Route path="/sign-up" element={<SignupPage setIsAuthenticated={setIsAuthenticated}/>} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/workout-plan" element={<WorkoutPlan />} />
-        <Route path="/workout-archive" element={<WorkoutArchive />} />
+        <Route path="/workout-archive" element={<WorkoutArchive archivedWorkouts={archivedWorkouts}/>} />
       </Routes>
       <Footer />
     </BrowserRouter>

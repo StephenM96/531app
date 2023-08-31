@@ -10,11 +10,14 @@ const WorkoutPlan = () => {
     window.print();
   };
 
-  const handleSaveWorkout = (week, date, lift) => {
-    setArchivedWorkouts((prevWorkouts) => [
-      ...prevWorkouts,
-      { week, date, lift },
-    ]);
+  const [archivedWorkouts, setArchivedWorkouts] = useState([]);
+  const handleSaveWorkout = () => {
+    const workoutDetails = {
+      lifts: lifts,
+      startDate: startDate,
+    };
+
+    setArchivedWorkouts((prevWorkouts) => [...prevWorkouts, workoutDetails]);
   };
 
   const liftsOrder = ["Squat", "Bench", "Deadlift", "OverheadPress"];
@@ -71,6 +74,9 @@ const WorkoutPlan = () => {
       </div>
 
       <div>
+      <button onClick={handleSaveWorkout}>Save Workout</button>
+      </div>
+      <div>
         <button onClick={handlePrint}>Print Workout Plan</button>
       </div>
       <h2>3-Week Workout Plan</h2>
@@ -88,7 +94,6 @@ const WorkoutPlan = () => {
                 week={week}
                 roundToNearest5={roundToNearest5}
                 // workoutDate={workoutDates[(week - 1) * 7]}
-                onSaveWorkout={handleSaveWorkout} //saves workout
               />
             ))}
           </div>

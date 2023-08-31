@@ -11,13 +11,10 @@ const WorkoutGenerate = ({ lift, details, week, roundToNearest5, workoutDate, on
   const tMax = trainingMax(oneRepMaxValue);
   // const startDate = new Date();
   const currentDate = new Date(startDate); //calculate date for current workout day
-  console.log("Before: ", currentDate)
+  // console.log("Before: ", currentDate)
   currentDate.setDate(currentDate.getDate() + dayOffset); //adjust date based on week
-  console.log(currentDate)
+  // console.log(currentDate)
   const displayDate = currentDate.toUTCString()
-  const handleSaveWorkout = () => {
-    onSaveWorkout(week, workoutDate.date, lift);
-  }
   const percentages =
     week === 1
       ? [0.65, 0.75, 0.85]
@@ -52,7 +49,6 @@ const WorkoutGenerate = ({ lift, details, week, roundToNearest5, workoutDate, on
         <li>Pull movement: 25-50 reps</li>
         <li>Single-leg/core work: 25-50 reps</li>
       </ul>
-      <button onClick={handleSaveWorkout}>Save Workout</button>
     </div>
   );
 };
