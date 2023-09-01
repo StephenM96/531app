@@ -22,22 +22,22 @@ const WorkoutPlan = ({ setArchivedWorkouts }) => {
     const workoutDetails = {
       squatOriginalMaxWeight: lifts.Squat.weightLifted,
       benchOriginalMaxWeight: lifts.Bench.weightLifted,
-      deadlifttOriginalMaxWeight: lifts.Deadlift.weightLifted,
+      deadliftOriginalMaxWeight: lifts.Deadlift.weightLifted,
       overheadPressOriginalMaxWeight: lifts.OverheadPress.weightLifted,
       squatOriginalMaxReps: lifts.Squat.reps,
       benchOriginalMaxReps: lifts.Bench.reps,
       deadliftOriginalMaxReps: lifts.Deadlift.reps,
       overheadPressOriginalMaxReps: lifts.OverheadPress.reps,
-      startDate: { setStartDate },
-      endDate: "04/29/2023",
+      startDate: startDate,
+      endDate: "2023-09-29 23:59:59",
       squatEst1rm: "365",
       benchEst1rm: "260",
       deadliftEst1rm: "470",
       OverheadPressEst1rm: "155",
-      squatTrainingMax: "310",
-      benchTrainingMax: "220",
-      deadliftTrainingMax: "400",
-      overheadPressTrainingMax: "130",
+      squatTrainingMax: lifts.Squat.tMax,
+      benchTrainingMax: lifts.Bench.tMax,
+      deadliftTrainingMax: lifts.Deadlift.tMax,
+      overheadPressTrainingMax: lifts.OverheadPress.tMax,
       squatWeek1: "265",
       squatWeek2: "280",
       squatWeek3: "295",
@@ -54,7 +54,7 @@ const WorkoutPlan = ({ setArchivedWorkouts }) => {
     console.log("save", workoutDetails);
 
     try {
-      const response = await fetch('/workouts', {
+      const response = await fetch('http://localhost:8000/api/workouts/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

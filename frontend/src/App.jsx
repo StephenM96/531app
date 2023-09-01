@@ -21,19 +21,19 @@ const App = () => {
 
   const [data, setData] = useState([])
 
-  useEffect(() => {
-    fetch('http://localhost:8000/api/workouts/')
-    .then(response => response.json())
-    .then(json => {
-      console.log(json)
-      setData(json.data)
-    })
+  // useEffect(() => {
+  //   fetch('http://localhost:8000/api/workouts/')
+  //   .then(response => response.json())
+  //   .then(json => {
+  //     console.log(json)
+  //     setData(json.data)
+  //   })
 
-    // return () => {
-    //   second
-    // }
-    //not sure why these lines are here...
-  }, [])
+  //   // return () => {
+  //   //   second
+  //   // }
+  //   //not sure why these lines are here...
+  // }, [])
 
   return (
     <BrowserRouter>
