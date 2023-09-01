@@ -1,8 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./WorkoutArchiveStyle.css"
 
-const WorkoutArchive = ({archivedWorkouts, setArchivedWorkouts}) => {
-console.log("Archive: ", archivedWorkouts)
+const WorkoutArchive = () => {
+    const [archivedWorkouts, setArchivedWorkouts] = useState([]);
+
+    useEffect(() => {
+        fetchWorkouts();
+    }, []);
+
+    const fetchWorkouts = async () => {
+        try {
+            const response = await fetch("/workouts");
+            const data = await response.json();
+            setArchivedWorkouts(data)
+        } catch (error) {
+            console.error(error)
+        }
+    };
+
     return (
         <div className="workout-container">
             <h2>Archived Workouts</h2>
@@ -11,7 +26,7 @@ console.log("Archive: ", archivedWorkouts)
                     <li key={index}>
                         {/* display archived workout here */}
                         {/* Start Date: {workout.startDate.toDateString()},  */}
-                        Lift: {workout.lifts[0]}
+                        Week: {workout.week}, Date: {workout.date}, Lift: {workout.lift}
                     </li>
                 ))}
             </ul>

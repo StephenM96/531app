@@ -4,7 +4,7 @@ import WorkoutGenerate from "./WorkoutGenerate";
 import MaxValuesDisplay from "./MaxValuesDisplay";
 import "./WorkoutPlanStyle.css";
 
-const WorkoutPlan = ({setArchivedWorkouts}) => {
+const WorkoutPlan = ({ setArchivedWorkouts }) => {
   const [startDate, setStartDate] = useState(""); // State for the start date
   const liftsOrder = ["Squat", "Bench", "Deadlift", "OverheadPress"];
   const [lifts, setLifts] = useState({
@@ -18,12 +18,59 @@ const WorkoutPlan = ({setArchivedWorkouts}) => {
     window.print();
   };
 
-  const handleSaveWorkout = () => {
+  const handleSaveWorkout = async () => {
     const workoutDetails = {
-      lifts: lifts,
-      startDate: startDate,
+      squatOriginalMaxWeight: lifts.Squat.weightLifted,
+      benchOriginalMaxWeight: lifts.Bench.weightLifted,
+      deadlifttOriginalMaxWeight: lifts.Deadlift.weightLifted,
+      overheadPressOriginalMaxWeight: lifts.OverheadPress.weightLifted,
+      squatOriginalMaxReps: lifts.Squat.reps,
+      benchOriginalMaxReps: lifts.Bench.reps,
+      deadliftOriginalMaxReps: lifts.Deadlift.reps,
+      overheadPressOriginalMaxReps: lifts.OverheadPress.reps,
+      startDate: { setStartDate },
+      endDate: "04/29/2023",
+      squatEst1rm: "365",
+      benchEst1rm: "260",
+      deadliftEst1rm: "470",
+      OverheadPressEst1rm: "155",
+      squatTrainingMax: "310",
+      benchTrainingMax: "220",
+      deadliftTrainingMax: "400",
+      overheadPressTrainingMax: "130",
+      squatWeek1: "265",
+      squatWeek2: "280",
+      squatWeek3: "295",
+      benchWeek1: "185",
+      benchWeek2: "200",
+      benchWeek3: "210",
+      deadliftWeek1: "340",
+      deadliftWeek2: "360",
+      deadliftWeek3: "380",
+      ohpWeek1: "110",
+      ohpWeek2: "120",
+      ohpWeek3: "125",
     };
-    console.log("save", workoutDetails)
+    console.log("save", workoutDetails);
+
+    try {
+      const response = await fetch('/workouts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(workoutDetails),
+      });
+      if (response.ok) {
+        //workout data saved successfully?
+        //show a success message or perform following...
+      } else {
+        //erro response
+        console.error('Error saving workout data');
+      } 
+    } catch (error) {
+      console.error(error)
+    }
 
     setArchivedWorkouts((prevWorkouts) => [...prevWorkouts, workoutDetails]);
   };
@@ -71,8 +118,12 @@ const WorkoutPlan = ({setArchivedWorkouts}) => {
       </div>
 
       <div className="plan-btn-container">
-        <button className="plan-btn" onClick={handleSaveWorkout}>Save Workout</button>
-        <button className="plan-btn" onClick={handlePrint}>Print Workout Plan</button>
+        <button className="plan-btn" onClick={handleSaveWorkout}>
+          Save Workout
+        </button>
+        <button className="plan-btn" onClick={handlePrint}>
+          Print Workout Plan
+        </button>
       </div>
       <h2>3-Week Workout Plan</h2>
       <div className="weeks-container">
@@ -80,16 +131,16 @@ const WorkoutPlan = ({setArchivedWorkouts}) => {
           <div key={week} className="week-container">
             {liftsOrder.map((lift) => (
               <div className="day-container">
-              <WorkoutGenerate
-                startDate={startDate}
-                dayOffset={calculateDayOffset(lift, week)}
-                key={lift}
-                lift={lift}
-                details={lifts[lift]}
-                week={week}
-                roundToNearest5={roundToNearest5}
-              />
-              </ div>
+                <WorkoutGenerate
+                  startDate={startDate}
+                  dayOffset={calculateDayOffset(lift, week)}
+                  key={lift}
+                  lift={lift}
+                  details={lifts[lift]}
+                  week={week}
+                  roundToNearest5={roundToNearest5}
+                />
+              </div>
             ))}
           </div>
         ))}
