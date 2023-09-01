@@ -1,4 +1,5 @@
 import React from "react";
+import "./MaxValueDisplayStyle.css"
 
 const MaxValuesDisplay = ({ lifts }) => {
   const roundToNearest5 = (value) => Math.floor(value / 5) * 5;
@@ -18,15 +19,17 @@ const MaxValuesDisplay = ({ lifts }) => {
   }, {});
 
   return (
-    <div className="max-values">
+    <div className="max-title">
       <h2>Estimated 1 Rep Max and Training Max</h2>
+      <div className="max-values">
       {liftNames.map((lift) => (
         <div key={lift} className="lift-max">
           <h3>{lift}</h3>
           <p>Estimated 1 Rep Max: {maxValues[lift].oneRepMax} lbs</p>
           <p>Training Max: {maxValues[lift].trainingMax} lbs</p>
         </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

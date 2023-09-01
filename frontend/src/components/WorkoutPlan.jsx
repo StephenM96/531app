@@ -70,19 +70,17 @@ const WorkoutPlan = ({setArchivedWorkouts}) => {
         <MaxValuesDisplay className="max-value" lifts={lifts} />
       </div>
 
-      <div>
-        <button onClick={handleSaveWorkout}>Save Workout</button>
-      </div>
-      <div>
-        <button onClick={handlePrint}>Print Workout Plan</button>
+      <div className="plan-btn-container">
+        <button className="plan-btn" onClick={handleSaveWorkout}>Save Workout</button>
+        <button className="plan-btn" onClick={handlePrint}>Print Workout Plan</button>
       </div>
       <h2>3-Week Workout Plan</h2>
       <div className="weeks-container">
         {Array.from({ length: 3 }, (_, i) => i + 1).map((week) => (
           <div key={week} className="week-container">
             {liftsOrder.map((lift) => (
+              <div className="day-container">
               <WorkoutGenerate
-                className="day-column"
                 startDate={startDate}
                 dayOffset={calculateDayOffset(lift, week)}
                 key={lift}
@@ -91,6 +89,7 @@ const WorkoutPlan = ({setArchivedWorkouts}) => {
                 week={week}
                 roundToNearest5={roundToNearest5}
               />
+              </ div>
             ))}
           </div>
         ))}

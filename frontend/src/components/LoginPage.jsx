@@ -42,15 +42,15 @@ const LoginPage = ({setIsAuthenticated}) => {
           setIsAuthenticated(sessionStorage.getItem("authenticated"))
           navigate("/dashboard");
         } else {
+          console.warn(json.message); //error
           setError(json.message);
+          window.alert(json.message);
         }
       });
-
-    navigate("/dashboard");
   };
 
   return (
-    <div className="page-container">
+    <div>
       <div id="card">
         <div id="card-content">
           <div id="card-title">
@@ -90,6 +90,7 @@ const LoginPage = ({setIsAuthenticated}) => {
               <button id="submit-btn" onClick={handleSubmit}>
                 LOGIN
               </button>
+              {error ? <Label>{error}</Label> : null}
             </form>
             <p>
               Don't have an account?{" "}

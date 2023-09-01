@@ -1,4 +1,5 @@
 import React from "react";
+import "./LiftInputStyle.css"
 
 const LiftInput = ({
   lift,
@@ -8,7 +9,7 @@ const LiftInput = ({
   startDate,
 }) => {
   return Object.keys(lift).map((lift) => (
-    <div>
+    <div className="lift-input-container">
       <label>{`${lift}: `}</label>
       Weight:
       <input

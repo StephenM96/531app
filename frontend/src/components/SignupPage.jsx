@@ -49,7 +49,7 @@ const SignupPage = ({setIsAuthenticated}) => {
   };
 
   return (
-    <div className="page-container">
+    <div>
       <div id="card">
         <div id="card-content">
           <div id="card-title">
