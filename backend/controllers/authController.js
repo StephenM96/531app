@@ -42,22 +42,20 @@ const loginUserByEmail = (req, res) => {
     .then((data) => {
       //If email exists in the database, pull the stored password (which is hashed)
       //and compare it to the payload from the request body
-      if (
-        data &&
-        bcrypt.compareSync(unhashedPassword, data[0].dataValues.password)
-      ) {
-        data[0].dataValues.password = undefined
-          res.status(200).send({ success: true, data: data });
+      if(data.length > 0) {
+        if(data && bcrypt.compareSync(unhashedPassword, data[0].dataValues.password)){
+          data[0].dataValues.password = undefined //removes key from response
+          res.status(200).send({ success: true, data: data})
+        } else {
+          console.log('Password or username is incorrect')
+          res.status(403).send({ success: false, message: "Wrong username or password!"})
+        }
       } else {
-        console.log("password is incorrect");
-        // Obfuscate the response, don't let potential attackers know if they have the correct login email or username!
-        // Use the payload key "success" to programmatically tell your application what to do next:
-        // If (response.success === true) { show login success, allow access to protected routes }
-        // else if (response.success === false) { show login error message, ask user to check username email and password and try again }
-        // NOTE: these are boolean values, NOT strings (true vs "true")
-        res.status(403).send({ success: false, data: "Wrong username or password!"})
+        //user not found
+        res.status(403).send({ success: false, message: "Wrong username or password!"})
       }
     })
+
     .catch(err => {
       console.log("Error:", err)
       throw err
@@ -65,6 +63,12 @@ const loginUserByEmail = (req, res) => {
 };
 
 module.exports = {
-  signUpUser, 
+  signUpUser,
   loginUserByEmail,
 };
+
+// Obfuscate the response, don't let potential attackers know if they have the correct login email or username!
+// Use the payload key "success" to programmatically tell your application what to do next:
+// If (response.success === true) { show login success, allow access to protected routes }
+// else if (response.success === false) { show login error message, ask user to check username email and password and try again }
+// NOTE: these are boolean values, NOT strings (true vs "true")

@@ -1,0 +1,16 @@
+/* body, html {
+    background-image: url("../assets/landingPageBackground.jpg"); */
+    /* height: 100%; */
+    /* background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
+
+.page-container {
+    height: 100vh;
+}
+
+label {
+    font-family: "Raleway", sans-serif;
+    font-size: 11pt;
+  }

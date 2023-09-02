@@ -1,14 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "./LoginPageStyle.css";
 
-const LoginPage = () => {
+const LoginPage = ({setIsAuthenticated}) => {
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
+  const [error, setError] = useState("");
+
+  let navigate = useNavigate();
 
   const handleInputChange = (e) => {
+    e.preventDefault();
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -16,69 +21,86 @@ const LoginPage = () => {
     });
   };
 
-  // const handleLogin = () => {
-  //   // Call authentication API here using formData
-  //   // Redirect to dashboard on successful login
-  // };
-  //placeholder until I can connect to login auth backend
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
 
-  //     const username = useRef("");
-  // const email = useRef("");
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   // Validate the username
-  //   if (!username.current.value.match(/^[a-zA-Z0-9]{3,16}$/)) {
-  //     alert("Please enter a valid username");
-  //     return;
-  //   }
-
-  //   // Validate the email
-  //   if (!email.current.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/)) {
-  //     alert("Please enter a valid email");
-  //     return;
-  //   }
-
-  //   // Submit the form
-  //   // ...
-  // };
-  //Can use a code like this to validate username OR email??? Will have to play with it some more
+    fetch("http://localhost:8000/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        if (json.success) {
+          //if response is successful = true
+          sessionStorage.setItem("authenticated", json.success);
+          sessionStorage.setItem("id", json.data[0].id);
+          setIsAuthenticated(sessionStorage.getItem("authenticated"))
+          navigate("/dashboard");
+        } else {
+          console.warn(json.message); //error
+          setError(json.message);
+          window.alert(json.message);
+        }
+      });
+  };
 
   return (
-    <div className="log-in container">
-      <h2>Log In</h2>
-      <form>
-        <label>Username or Email:</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleInputChange}
-        />
-        {/* add functionality for both email and user here */}
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        {/* <button type="button" onClick={handleSignup}>Log In</button> */}
-        {/* set to just redirect to dashboard at this moment... Need to set up with proper auth now */}
-        <Link to="/dashboard">
-          Log In.. Placeholder until log in auth is linked to backend properly
-        </Link>
-      </form>
-      <p>
-        Don't have an account? <Link to="/sign-up">Create Account!</Link>
-      </p>
+    <div>
+      <div id="card">
+        <div id="card-content">
+          <div id="card-title">
+            <h2>LOGIN</h2>
+            <div className="underline-title"></div>
+          </div>
+          <div className="log-in-form">
+            <form className="form">
+              <label for="user-email" id="email-label">
+                Email:
+              </label>
+              <input
+                id="user-email"
+                className="form-content"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+              <div className="form-border"></div>
+              <label for="user-password" id="password-label">
+                Password:
+              </label>
+              <input
+                id="user-password"
+                className="form-content"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+              <div className="form-border"></div>
+              <a href="#">
+                <legend id="forgot-pass">Forgot password?</legend>
+              </a>
+              {error ? <p>{error}</p> : null}
+              <button id="submit-btn" onClick={handleSubmit}>
+                LOGIN
+              </button>
+              {error ? <Label>{error}</Label> : null}
+            </form>
+            <p>
+              Don't have an account?{" "}
+              <Link to="/sign-up" id="sign-up">
+                Create Account!
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

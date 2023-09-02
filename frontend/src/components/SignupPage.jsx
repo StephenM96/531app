@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "./SignupPageStyle.css";
 
-const SignupPage = () => {
+const SignupPage = ({setIsAuthenticated}) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    username: "",
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
+
+  let navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,57 +21,105 @@ const SignupPage = () => {
     });
   };
 
-  const handleSignup = () => {
-    // Call registration API here using formData
-    // Redirect to login page on successful registration
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+
+    fetch("http://localhost:8000/api/auth/signup", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        if (json.success) {
+          //if response success = true
+          // NOTE: look at the response from the API, it does not return json.data as an array
+          sessionStorage.setItem("authenticated", json.success); //this sets the login auth to true so the user doesn't have to login after signing up
+          sessionStorage.setItem("id", json.data.id);
+          setIsAuthenticated(sessionStorage.getItem("authenticated"))
+          navigate("/dashboard");
+        } else {
+          setError(json.message.errors[0].message);
+        }
+      });
   };
 
   return (
-    <div className="signup-container">
-      <h2>Sign Up</h2>
-      <form>
-        <label>First Name:</label>
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleInputChange}
-        />
-        <label>Last Name:</label>
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleInputChange}
-        />
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleInputChange}
-        />
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        <button type="button" onClick={handleSignup}>
-          Sign Up
-        </button>
-      </form>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+    <div>
+      <div id="card">
+        <div id="card-content">
+          <div id="card-title">
+            <h2>SIGN UP</h2>
+            <div className="underline-title"></div>
+          </div>
+          <form className="form">
+            <label for="first-name" id="first-name">
+              First Name:
+            </label>
+            <input
+              id="first-name"
+              className="form-content"
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleInputChange}
+            />
+            <div className="form-border"></div>
+            <label for="last-name" id="last-name">
+              Last Name:
+            </label>
+            <input
+              id="last-name"
+              className="form-content"
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleInputChange}
+            />
+            <div className="form-border"></div>
+            <label for="user-email" id="user-email">
+              Email:
+            </label>
+            <input
+              id="user-email"
+              className="form-content"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+            <div className="form-border"></div>
+            <label for="user-password" id="user-password">
+              Password:
+            </label>
+            <>
+              <input
+                id="user-password"
+                className="form-content"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+            </>
+            <div className="form-border"></div>
+            {error ? <p>{error}</p> : null}
+            <button id="submit-btn" type="button" onClick={handleSubmit}>
+              SIGN UP
+            </button>
+          </form>
+          <p>
+            Already have an account?{" "}
+            <Link to="/" id="login">
+              Login
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

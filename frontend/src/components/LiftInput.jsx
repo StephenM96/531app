@@ -1,4 +1,5 @@
 import React from "react";
+import "./LiftInputStyle.css"
 
 const LiftInput = ({
   lift,
@@ -8,7 +9,7 @@ const LiftInput = ({
   startDate,
 }) => {
   return Object.keys(lift).map((lift) => (
-    <div>
+    <div className="lift-input-container">
       <label>{`${lift}: `}</label>
       Weight:
       <input
@@ -25,13 +26,6 @@ const LiftInput = ({
         value={reps}
         onChange={(e) => handleInputChange(e, lift)}
         placeholder="Reps"
-      />
-      Start Date:
-      <input
-        type="date"
-        name="startDate"
-        value={startDate}
-        onChange={(e) => handleInputChange(e, lift)}
       />
     </div>
   ));
