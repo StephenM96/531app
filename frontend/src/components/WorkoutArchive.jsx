@@ -10,7 +10,7 @@ const WorkoutArchive = () => {
 
     const fetchWorkouts = async () => {
         try {
-            const response = await fetch("/workouts");
+            const response = await fetch("http://localhost:8000/api/workouts");
             //fix this route when the save workout fetch handler is working
             const data = await response.json();
             setArchivedWorkouts(data)

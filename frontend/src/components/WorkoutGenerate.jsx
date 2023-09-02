@@ -19,6 +19,12 @@ const WorkoutGenerate = ({ lift, details, week, roundToNearest5, workoutDate, on
       ? [0.7, 0.8, 0.9]
       : [0.75, 0.85, 0.95];
 
+  // const firstSetWeight = roundToNearest5(percentages[2] *  tMax);
+  // const secondSetWeight = roundToNearest5(percentages[2] *  tMax);
+  // const thirdSetWeight = roundToNearest5(percentages[2] *  tMax);
+
+  // onSaveWorkout(lift, thirdSetWeight, week);
+
   return (
     <div key={lift}>
       <h3>{`${lift} Day (Week ${week}) - ${displayDate}`}</h3>

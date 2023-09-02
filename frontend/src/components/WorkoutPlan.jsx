@@ -18,6 +18,14 @@ const WorkoutPlan = ({ setArchivedWorkouts }) => {
   const handlePrint = () => {
     window.print();
   };
+  //Calc end date based on startdate
+  const calculatedEndDate = (startDate) => {
+    const daysToAdd = 25; //can adjust here as needed
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + daysToAdd);
+    return endDate.toUTCString()
+    //can try toISOString()?
+  }
 
   //calc when weight or reps change
   useEffect(() => {
@@ -30,16 +38,44 @@ const WorkoutPlan = ({ setArchivedWorkouts }) => {
         oneRepMax: newOneRepMax,      }
     }
     setLifts(updatedLifts)
-  }, []);
+  }, [lifts.Squat.weightLifted,
+    lifts.Bench.weightLifted,
+    lifts.Deadlift.weightLifted,
+    lifts.OverheadPress.weightLifted,
+    lifts.Squat.reps,
+    lifts.Bench.reps,
+    lifts.Deadlift.reps,
+    lifts.OverheadPress.reps,]);
 
   const oneRepMax = (weight, reps) => weight * reps * 0.0333 + weight;
   const trainingMax = (oneRepMaxValue) => oneRepMaxValue * 0.85;
   const oneRepMaxValue = oneRepMax(lifts.weightLifted, lifts.reps);
   const tMax = trainingMax(oneRepMaxValue);
 
+  // const handleThirdSetWeightChange = (lift, weight, week) => {
+  //   setLifts((prevLifts) => ({
+  //     ...prevLifts,
+  //     [lift]: {...prevLifts[lift], thirdSetWeight: weight, week },
+  //   }));
+  // };
+
+  
+
  
 
   const handleSaveWorkout = async () => {
+    const liftsWithMaxValues = {};
+    for (const lift in lifts) {
+      const liftDetails = lifts[lift];
+      const oneRepMaxValue = oneRepMax(liftDetails.weightLifted, liftDetails.reps);
+      const trainingMaxValue = trainingMax(oneRepMaxValue);
+      liftsWithMaxValues[lift] = {
+        ...liftDetails,
+        oneRepMax: roundToNearest5(oneRepMaxValue),
+        trainingMax: roundToNearest5(trainingMaxValue),
+      };
+    }
+
     const workoutDetails = {
       squatOriginalMaxWeight: lifts.Squat.weightLifted,
       benchOriginalMaxWeight: lifts.Bench.weightLifted,
@@ -50,16 +86,18 @@ const WorkoutPlan = ({ setArchivedWorkouts }) => {
       deadliftOriginalMaxReps: lifts.Deadlift.reps,
       overheadPressOriginalMaxReps: lifts.OverheadPress.reps,
       startDate: startDate,
-      endDate: "2023-09-29 23:59:59",
-      squatEst1rm: lifts.squat.oneRepMax,
-      benchEst1rm: "260",
-      deadliftEst1rm: "470",
-      OverheadPressEst1rm: "155",
-      squatTrainingMax: "310",
-      benchTrainingMax: "220",
-      deadliftTrainingMax: "400",
-      overheadPressTrainingMax: "130",
-      squatWeek1: "265",
+      endDate: calculatedEndDate(startDate),
+      // lifts: liftsWithMaxValues,
+      squatEst1rm: liftsWithMaxValues.Squat.oneRepMax,
+      benchEst1rm: liftsWithMaxValues.Bench.oneRepMax,
+      deadliftEst1rm: liftsWithMaxValues.Deadlift.oneRepMax,
+      overheadPressEst1rm: liftsWithMaxValues.OverheadPress.oneRepMax,
+      // overheadPressEst1rm: "155",
+      squatTrainingMax: liftsWithMaxValues.Squat.trainingMax,
+      benchTrainingMax: liftsWithMaxValues.Bench.trainingMax,
+      deadliftTrainingMax: liftsWithMaxValues.Deadlift.trainingMax,
+      overheadPressTrainingMax: liftsWithMaxValues.OverheadPress.trainingMax,
+      // squatWeek1: lifts.Squat.thirdSetWeight,
       squatWeek2: "280",
       squatWeek3: "295",
       benchWeek1: "185",
@@ -160,6 +198,7 @@ const WorkoutPlan = ({ setArchivedWorkouts }) => {
                   details={lifts[lift]}
                   week={week}
                   roundToNearest5={roundToNearest5}
+                  // onSaveWorkout={handleThirdSetWeightChange}
                 />
               </div>
             ))}
